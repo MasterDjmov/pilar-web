@@ -13,15 +13,16 @@ import {AppBar,
   ListItemIcon,
   Popover,
   MenuItem as MenuItemMui,
-  Collapse} from '@mui/material';
+  Collapse,
+  Divider} from '@mui/material';
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import React, {useEffect, useState, useRef} from 'react';
 import { Outlet, useLocation, useNavigate, Link as RouterLink } from 'react-router-dom';
 import { drawerMenu, popMenu } from '../../constants/menu';
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import { appSelector, appActions } from '../../redux/appRedux';
 
 
 
@@ -138,6 +139,8 @@ const SideMenu = ({open, onClose}) => {
 
 
 const DashboardLayout = ()=>{
+  const dispatch = useDispatch()
+  const pageTitle = useSelector(appSelector.pageTitle)
   const [open, setOpen]= useState(false)
   
 
@@ -155,8 +158,9 @@ const DashboardLayout = ()=>{
       noWrap
       sx={{ flexGrow: 1 }}
       >
-      Pilar Tecno Web
+      Pilar Tecno Web - {pageTitle}
     </Typography>
+    
     <PopMenu/>
     </Toolbar>
     </AppBar>
